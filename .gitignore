@@ -122,3 +122,12 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+pwebsite/
+secrets.py
+.wakatime-project
+
+api/psvenv/
+node_modules
+
+api/.flaskenv
