@@ -7,7 +7,8 @@ from github import Github
 from secrets import DATA_FOLDER_PATH, DESTINY_DATA_FILE_PATH, \
                     GITHUB_DATA_FILE_PATH, CHARACTER_DATA_GET, \
                     BUNGIE_API_KEY, GITHUB_TOKEN, WEATHER_API_URL, \
-                    WEATHER_DATA_FILE_PATH
+                    WEATHER_DATA_FILE_PATH, WAKATIME_DATA_FILE_PATH, \
+                    WAKATIME_LANGUAGES_URL
 import requests
 import json
 import pytz
@@ -87,12 +88,17 @@ def get_destiny_data():
     destiny_data = parse_destiny_data()
     outputdata = {}
     data = destiny_data["Response"]["character"]["data"]
-    # outputdata["last_playtime"] = data["dateLastPlayed"]
 
-    date_format = '%m/%d/%Y %H:%M:%S %Z'
-    dt = parse(outputdata["last_playtime"])
-    localtime = dt.astimezone(pytz.timezone('US/Pacific'))
+    # Get last playtime. Keeping this for sake of conversion reference
+    # But I doubt anyone needs to know WHEN I was last on.
+    # (Not that I would ever be on at 2am on a weekday....)
+
+    # outputdata["last_playtime"] = data["dateLastPlayed"]
+    # date_format = '%m/%d/%Y %H:%M:%S %Z'
+    # dt = parse(outputdata["last_playtime"])
+    # localtime = dt.astimezone(pytz.timezone('US/Pacific'))
     # outputdata["last_playtime"] = localtime.strftime(date_format)
+
     outputdata["playedLast"] = {}
     outputdata["playedLast"]["Hours"] = int(
         int(data["minutesPlayedThisSession"]) // 60
@@ -128,9 +134,33 @@ def get_github_data():
     return parse_github_data()
 
 @app.route("/wakatime")
-def get_wakablocks():
+def get_wakatime():
     
-    wakablocks = [
+    wakatime_data_file = Path(WAKATIME_DATA_FILE_PATH)
+
+    if wakatime_data_file.exists():
+        last_mod_time = datetime.fromtimestamp(
+            wakatime_data_file.stat().st_mtime
+        )
+        now_time = datetime.now()
+        difference = now_time - last_mod_time
+
+        seconds = difference.total_seconds()
+        hours = int(seconds // 3600)
+        # minutes = int( (seconds % 3600) // 60)
+        # seconds = int(seconds % 60)
+
+        if (hours > 12):
+            refresh_wakatime_data()
+    else:
+        refresh_wakatime_data()
+
+    outputdata = {}
+    raw_data = parse_wakatime_data()
+    outputdata['languages'] = {}
+    outputdata['languages'] = [item['name'] for item in raw_data['data'] if item['name'] not in outputdata['languages']]
+        
+    outputdata['wakablocks'] = [
         {
             "title":"Coding Activity over the last 7 days.",
             "type": "svg",
@@ -148,7 +178,7 @@ def get_wakablocks():
         }
     ]
 
-    return {"wakablocks_urls": wakablocks}
+    return outputdata;
 
 def refresh_destiny_data():
     temp_folder_path = Path(DATA_FOLDER_PATH)
@@ -227,5 +257,22 @@ def parse_github_data():
         raw_data = f.read()
         return json.loads(raw_data)
 
+def refresh_wakatime_data():
+    temp_folder_path = Path(DATA_FOLDER_PATH)
+    temp_path = Path(WAKATIME_DATA_FILE_PATH)
+
+    if temp_folder_path.exists() is False:
+        temp_folder_path.mkdir()
+
+    temp_path.touch()
+
+    r = requests.get(WAKATIME_LANGUAGES_URL)
+
+    temp_path.write_text(r.text)
+
+def parse_wakatime_data():
+    with open(WAKATIME_DATA_FILE_PATH, "r") as f:
+        raw_data = f.read()
+        return json.loads(raw_data)
 if __name__ == "__main__":
     app.run()

@@ -120,7 +120,7 @@ function ScrollTop(props: Props) {
 
 function App() {
   const [githubData, setGithubData] = useState<any>();
-  const [wakablocksData, setWakablocksData] = useState<any>();
+  const [wakatimeData, setWakatimeData] = useState<any>();
   const [weatherData, setWeatherData] = useState<any>();
   const [destinyData, setDestinyData] = useState<any>();
 
@@ -141,7 +141,7 @@ function App() {
     .then(response => response.json())
     .then(data => 
         {
-            setWakablocksData(data);
+            setWakatimeData(data);
         }
     )
 
@@ -157,7 +157,6 @@ function App() {
     .then(response => response.json())
     .then( data => 
       {
-        console.log(data);
         setDestinyData(data);
       }
     )
@@ -222,7 +221,19 @@ function App() {
                     }
                 </Typography>
                 <Typography component="p">
-                  I have over 25 years of experience designing and developing software. I started with BASIC and worked my way up to C/C++. My favorites are C# and ColdFusion, however these days I'm using mostly Python, Java, JavaScript, and TypeScript.<br/>
+                  I have over 25 years of experience designing and developing software. I started with BASIC and worked my way up to C/C++. My favorites are C# and ColdFusion, however these days I'm using mostly Python, Java, JavaScript, and TypeScript.
+                </Typography>
+                <Typography component="p">
+                  According to my <Link href='http://www.wakatime.com'>Wakatime</Link> stats, the languages I've used the most in the past 30 days are:<br/>
+                  <div hidden={wakatimeData != null}>
+                      <Typography variant="h5">
+                          Gathering Data...
+                      </Typography>
+                      <LinearProgress hidden={wakatimeData != null} />
+                  </div>
+                  { wakatimeData && <Typography component="p"> 
+                    {wakatimeData.languages.join(", ") }
+                  </Typography>}
                 </Typography>
                 <Typography component="p">
                   If you would like to know more about my work history, I highly suggest giving my <Link href="https://www.linkedin.com/in/EddieDover">Linked.In</Link> profile a visit.
@@ -322,11 +333,11 @@ function App() {
                         A few of my projects are monitored with <Link target="_blank" rel="noopener" href='http://www.wakatime.com'>Wakatime</Link>!
                     </Typography>
                   </Box>
-                  <div hidden={wakablocksData != null}>
+                  <div hidden={wakatimeData != null}>
                       <Typography variant="h5">
                           Gathering Data...
                       </Typography>
-                      <LinearProgress hidden={wakablocksData != null} />
+                      <LinearProgress hidden={wakatimeData != null} />
                   </div>
                   <CardContent>
                       <Grid 
@@ -335,7 +346,7 @@ function App() {
                           justify="center"
                           alignItems="center"
                       >
-                      {wakablocksData && wakablocksData.wakablocks_urls.map( (item:any) => (
+                      {wakatimeData && wakatimeData.wakablocks.map( (item:any) => (
                               <Grid item xs={12} md={6} key={item.src} >
                                   <object type="image/svg+xml" data={item.src}>
                                       <img src={item.src} title={item.title} alt={item.title} />
@@ -377,7 +388,7 @@ function App() {
                       {destinyData && <>
                       <Box m={3}>
                         <Typography>
-                          I've enjoyed the Destiny franchise, through all of it's massive ups and downs, since the Destiny 1 Alpha on Playstation
+                          I've enjoyed the Destiny franchise, through all of it's massive ups and downs, since the Destiny 1 Alpha on the Playstation.
                         </Typography>
                         <Typography>
                           I have played a total of {destinyData.total_hours_played} hours and I have reached LightLevel {destinyData.lightlevel}.<br/>
