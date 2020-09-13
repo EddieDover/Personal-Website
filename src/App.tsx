@@ -351,9 +351,11 @@ function App() {
                       >
                       {wakatimeData && wakatimeData.wakablocks.map( (item:any) => (
                               <Grid item xs={12} md={6} key={item.src} >
-                                  <object type="image/svg+xml" data={item.src}>
-                                      <img src={item.src} title={item.title} alt={item.title} />
-                                  </object>
+                                  <Card variant="outlined">
+                                      <object type="image/svg+xml" data={item.src}>
+                                          <img src={item.src} title={item.title} alt={item.title} />
+                                      </object>
+                                  </Card>
                               </Grid>
                       ))}
                       </Grid>
