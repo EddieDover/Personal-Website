@@ -169,7 +169,7 @@ function App() {
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>
-            <Typography id="top" variant="h4" className={classes.title}>
+            <Typography id="top" variant="h4" component="h1" className={classes.title}>
               EddieDover.net
             </Typography>
           </Toolbar>
@@ -189,17 +189,22 @@ function App() {
             <Grid item xs={12}>
               <Grid container direction="row" alignItems="center" justify="center" spacing={3}>
                 <Grid item>
-                  <Link href="https://linkedin.com/in/EddieDover" target="_blank" rel="noopener">
+                  <Link href="https://linkedin.com/in/EddieDover" target="_blank" rel="noopener" aria-label="LinkedIn profile">
                     <LinkedIn fontSize="large" />
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="https://github.com/EddieDover" target="_blank" rel="noopener">
+                  <Link href="https://github.com/EddieDover" target="_blank" rel="noopener" aria-label="Github profile">
                     <GitHub fontSize="large" />
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link href="https://twitter.com/EddieDover" target="_blank" rel="noopener">
+                  <Link href="https://hackerrank.com/edover" target="_blank" rel="noopener" aria-label="HackerRank profile">
+                    <i className="fab fa-hackerrank fa-3x"></i>
+                  </Link>
+                </Grid>
+                <Grid item>
+                  <Link href="https://twitter.com/EddieDover" target="_blank" rel="noopener" aria-label="Twitter page">
                     <Twitter fontSize="large" />
                   </Link>
                 </Grid>
@@ -219,26 +224,24 @@ function App() {
                       }><Button className={classes.locButton} >[Las Vegas, Nevada]</Button>
                       </WeatherTooltip>
                     }
+                    and I have over 25 years of experience.
                 </Typography>
-                <Typography component="p">
-                  I have over 25 years of experience designing and developing software. I started with BASIC and worked my way up to C/C++. My favorites are C# and ColdFusion, however these days I'm using mostly Python, Java, JavaScript, and TypeScript.
-                </Typography>
-                <Typography component="p">
+                <Typography component="div">
                   According to my <Link href='http://www.wakatime.com'>Wakatime</Link> stats, the languages I've used the most in the past 30 days are:<br/>
                   <div hidden={wakatimeData != null}>
-                      <Typography variant="h5">
+                      <Typography variant="h5" component="div">
                           Gathering Data...
                       </Typography>
                       <LinearProgress hidden={wakatimeData != null} />
                   </div>
-                  { wakatimeData && <Typography component="p"> 
-                    {wakatimeData.languages.join(", ") }
+                  { wakatimeData && <Typography component="div"> 
+                    [{wakatimeData.languages.join(", ") }]
                   </Typography>}
                 </Typography>
-                <Typography component="p">
+                <Typography component="div">
                   If you would like to know more about my work history, I highly suggest giving my <Link href="https://www.linkedin.com/in/EddieDover">Linked.In</Link> profile a visit.
                 </Typography>
-                <Typography component="p">
+                <Typography component="div">
                   While I am happily employed <span className={classes.green}>I am also open to hearing about new opportunities</span>, so if any of my work interests you, please reach out.
                 </Typography>
               </Box>
@@ -311,7 +314,7 @@ function App() {
                                     <TableCell><Link target="_blank" rel="noopener" href="https://reactjs.org/">React</Link></TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell></TableCell>
+                                    <TableCell>&nbsp;</TableCell>
                                     <TableCell><Link target="_blank" rel="noopener" href="https://material-ui.com/">Material-UI</Link></TableCell>
                                 </TableRow>
                             </TableHead>
@@ -388,7 +391,7 @@ function App() {
                       {destinyData && <>
                       <Box m={3}>
                         <Typography>
-                          I've enjoyed the Destiny franchise, through all of it's massive ups and downs, since the Destiny 1 Alpha on the Playstation.
+                          I've enjoyed the Destiny franchise, through all of it's massive ups and downs, since the Destiny 1 Alpha on the PlayStation.
                         </Typography>
                         <Typography>
                           I have played a total of {destinyData.total_hours_played} hours and I have reached LightLevel {destinyData.lightlevel}.<br/>
