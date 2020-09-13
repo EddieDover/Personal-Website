@@ -162,19 +162,19 @@ def get_wakatime():
         
     outputdata['wakablocks'] = [
         {
-            "title":"Coding Activity over the last 7 days.",
+            "title":"Coding Activity over the last 30 days.",
             "type": "svg",
-            "src":"https://wakatime.com/share/@EddieDover/6f6dd537-a5a9-42af-a5d3-d78a81458f98.svg",
+            "src":"https://wakatime.com/share/@EddieDover/e32ac05f-3ac0-4e98-b6bb-3a47658c3f2b.svg",
         },
         {
-            "title":"Languages over Last 7 Days.",
+            "title":"Languages over Last 30 Days.",
             "type": "svg",
-            "src":"https://wakatime.com/share/@EddieDover/ecfee35c-fd1c-4475-b4fa-37097fd8e1a5.svg",
+            "src":"https://wakatime.com/share/@EddieDover/f66ccf9e-054a-4154-8b39-a416a7beb0cd.svg",
         },
         {
-            "title":"Editors over Last 7 Days",
+            "title":"Editors over Last 30 Days",
             "type": "svg",
-            "src":"https://wakatime.com/share/@EddieDover/8be04f36-46a4-4eea-9366-1a01a36d765a.svg",
+            "src":"https://wakatime.com/share/@EddieDover/be658075-6161-4c9a-b9c6-d9bde056201f.svg",
         }
     ]
 
