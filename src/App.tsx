@@ -7,6 +7,7 @@ import { makeStyles, createStyles, Theme, Container, AppBar,
          TableHead, TableRow, Box, CircularProgress, withStyles, Tooltip,
          useScrollTrigger, Zoom, Fab } from '@material-ui/core';
 import { ArrowUpward, GitHub, LinkedIn, Twitter } from '@material-ui/icons';
+import ModalImage from "react-modal-image";
 
 interface Props {
   children: React.ReactElement;
@@ -16,6 +17,9 @@ const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       flexGrow: 1,
+    },
+    cert: {
+      width:"300px",
     },
     accordion:{
       width:"80%",
@@ -126,6 +130,32 @@ function App() {
 
   const classes = useStyles();
   const MenuItems = ["About Me", "My Work","Fun"];
+  const certs = [
+    {
+      "img":process.env.PUBLIC_URL + "/certs/js_basic.jpg",
+      "alt": "Javascripts Certification from HackerRank"
+    },
+    {
+      "img":process.env.PUBLIC_URL + "/certs/ps_basic.jpg",
+      "alt": "Problem Solving Certification from HackerRank"
+    },
+    {
+      "img":process.env.PUBLIC_URL + "/certs/python_basic.jpg",
+      "alt": "Python 3 Certification from HackerRank"
+    },
+    {
+      "img":process.env.PUBLIC_URL + "/certs/java_basic.jpg",
+      "alt": "Java Certification from HackerRank"
+    },
+    {
+      "img":process.env.PUBLIC_URL + "/certs/react_basic.jpg",
+      "alt": "React Certification from HackerRank"
+    },
+    {
+      "img":process.env.PUBLIC_URL + "/certs/rest_int.jpg",
+      "alt": "Restful A.P.I. Certification from HackerRank"
+    },
+  ]
 
   useEffect(() => {
 
@@ -239,10 +269,10 @@ function App() {
                   </Typography>}
                 </Typography>
                 <Typography component="div">
-                  If you would like to know more about my work history, I highly suggest giving my <Link href="https://www.linkedin.com/in/EddieDover">Linked.In</Link> profile a visit.
+                  While I am happily employed <span className={classes.green}>I am also open to hearing about new opportunities</span>, so if any of my work interests you, please reach out.
                 </Typography>
                 <Typography component="div">
-                  While I am happily employed <span className={classes.green}>I am also open to hearing about new opportunities</span>, so if any of my work interests you, please reach out.
+                  If you would like to know more about my work history, I highly suggest giving my <Link href="https://www.linkedin.com/in/EddieDover">Linked.In</Link> profile a visit.
                 </Typography>
               </Box>
             </Grid>
@@ -327,6 +357,22 @@ function App() {
                       </Typography>
                     </Box>
                 </Card>
+            </Grid>
+            <Grid item xs={12}>
+                <Card>
+                    <CardHeader className={classes.cardTitle} title="HackerRank"></CardHeader>
+                    <Box m={2}>
+                      <Typography> I also enjoy a little <Link href="https://hackerrank.com/edover" target="_blank" rel="noopener" aria-label="HackerRank profile">HackerRank</Link> from time to time.</Typography>
+                    </Box>
+                    <CardContent>
+                      <Grid container xs={12}>
+                      { certs.map( (cert) => (
+                        <ModalImage className={classes.cert} small={cert.img} large={cert.img} alt={cert.alt}/>
+                      ))
+                      }
+                      </Grid>
+                    </CardContent>
+                  </Card>
             </Grid>
             <Grid item xs={12}>
               <Card>
