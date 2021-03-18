@@ -1,4 +1,4 @@
-# EddieDover.net
+# EddieDover.dev
 
 This is a repository for my personal website.
 

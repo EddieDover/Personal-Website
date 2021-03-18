@@ -74,7 +74,7 @@ export default class Fun extends React.Component<FunProps, FunState> {
                         </Typography>
                         <Typography>
                           I have played a total of {this.state.destinyData.total_hours_played} hours and I have reached LightLevel {this.state.destinyData.lightlevel}.<br />
-                          My last play session was {this.state.destinyData.playedLast.Hours > 0 ? this.state.destinyData.playedLast.Hours + " and " : ''} {this.state.destinyData.playedLast.Minutes} minutes long.
+                          My last play session was {this.state.destinyData.playedLast.Hours > 0 ? this.state.destinyData.playedLast.Hours + " hour(s) and " : ''} {this.state.destinyData.playedLast.Minutes} minutes long.
                         </Typography>
                       </Box>
                       </>}

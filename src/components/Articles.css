@@ -1,0 +1,16 @@
+.article_title {
+    text-align:center;
+}
+
+.article_images a {
+    padding:10px;
+}
+
+.cardsContainer {
+    padding-top:5px;
+}
+
+.cardLink {
+    text-decoration-line: none;
+    cursor: pointer;
+}

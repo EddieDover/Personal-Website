@@ -2,6 +2,16 @@ import React from 'react';
 import { makeStyles, createStyles, Theme, Container, AppBar,
          Typography, Toolbar, Grid, useScrollTrigger, Zoom, Fab, Button } from '@material-ui/core';
 import { ArrowUpward } from '@material-ui/icons';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+
+import {HashLink as Link } from 'react-router-hash-link';
+
+import Articles from './components/Articles';
 import Fun from './components/Fun';
 import Wakatime from './components/Wakatime';
 import HackerRank from './components/HackerRank';
@@ -9,6 +19,7 @@ import ThisSite from './components/ThisSite';
 import AboutMe from './components/AboutMe';
 import MyWork from './components/MyWork';
 
+import "./App.css"
 interface Props {
   children: React.ReactElement;
 }
@@ -33,6 +44,15 @@ const useStyles = makeStyles((theme: Theme) =>
       flexDirection: "row",
       flexWrap: "nowrap",
       justifyContent: "center"
+    },
+    tabLink: {
+      color:"#fff",
+      fontSize: "0.875rem",
+      fontFamily: "Roboto Mono",
+      fontWeight: 500,
+      lineHeight: 1.75,
+      textTransform: "uppercase",
+      textDecorationLine: "none"
     },
     menuButton: {
       marginRight: theme.spacing(2),
@@ -112,41 +132,59 @@ function App() {
   const MenuItems = ["About Me", "My Work", "Fun"];
 
   return (
-    <>
-    <Container>
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <Typography id="top" variant="h4" component="h1" className={classes.title}>
-              EddieDover.net
-            </Typography>
-          </Toolbar>
-          <Toolbar className={classes.tabBar}>
-            {
-              MenuItems.map( (text, index) => (
-              <Button href={"#"+text.toLowerCase().replace(/ /g,"_")} variant="contained" color="primary" disableElevation key={index}>{text}</Button>
-              ))
-            }
-          </Toolbar>
-        </AppBar>
-        <main role="main">
-          <Grid container spacing={3}>
-            <AboutMe />
-            <MyWork />
-            <ThisSite />
-            <HackerRank  />
-            <Wakatime />
-            <Fun />
-          </Grid>
-        </main>
-      </div>
-    </Container>
-    <ScrollTop>
-      <Fab color="primary" size="small" aria-label="scroll back to top">
-        <ArrowUpward />
-      </Fab>
-    </ScrollTop>
-    </>
+    <Router>
+      <Container>
+        <div className={classes.root}>
+          <AppBar position="static">
+            <Toolbar>
+              <Typography id="top" variant="h4" component="h1" className={classes.title}>
+                EddieDover.dev
+              </Typography>
+            </Toolbar>
+            <Toolbar className={classes.tabBar}>
+              <Button component={Link} variant="contained" color="primary" singlearticle="false" disableElevation to={{ pathname:"/articles" }}>Articles</Button>
+              {
+                MenuItems.map( (text, index) => (
+                <Button component={Link} to={"/#"+text.toLowerCase().replace(/ /g,"_")} variant="contained" color="primary" disableElevation key={index}>{text}</Button>
+                ))
+              }
+            </Toolbar>
+          </AppBar>
+          <main role="main">
+            <Switch>
+              <Route exact path="/sitemapgen">
+                <Sitemap/>
+              </Route>
+              <Route path="/articles">
+                <Articles/>
+              </Route>
+              <Route exact path="/">
+                <Grid container spacing={3}>
+                  <AboutMe />
+                  <MyWork />
+                  <ThisSite />
+                  <HackerRank  />
+                  <Wakatime />
+                  <Fun />
+                </Grid>
+              </Route>
+            </Switch>
+          </main>
+          <footer className='footer'>
+            <AppBar position="static">
+              <Toolbar>
+                <a href={process.env.PUBLIC_URL + 'sitemap.xml'}>Sitemap</a>
+              </Toolbar>
+            </AppBar>
+          </footer>
+        </div>
+      </Container>
+      <ScrollTop>
+        <Fab color="primary" size="small" aria-label="scroll back to top">
+          <ArrowUpward />
+        </Fab>
+      </ScrollTop>
+    </Router>
   );
 }
 

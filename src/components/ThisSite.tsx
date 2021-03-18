@@ -11,7 +11,7 @@ export default class ThisSite extends React.Component {
                     <CardHeader className="cardTitle" title="This Site"></CardHeader>
                     <Box m={2}>
                       <Typography component={'p'}>
-                          This site is open-source and may be found <Link target="_blank" rel="noopener" href="https://www.github.com/EddieDover/personal-website/">here</Link>.
+                          This site is open-source and may be found on <Link target="_blank" rel="noopener" href="https://www.github.com/EddieDover/personal-website/">My Github</Link>.
                       </Typography>
                       <Typography component={'p'}>
                           It uses a combination of the following technologies:

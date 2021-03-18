@@ -161,11 +161,11 @@ def get_wakatime():
     outputdata['languages'] = [item['name'] for item in raw_data['data'] if item['name'] not in outputdata['languages']]
         
     outputdata['wakablocks'] = [
-        {
-            "title":"Coding Activity over the last 30 days.",
-            "type": "svg",
-            "src":"https://wakatime.com/share/@EddieDover/e32ac05f-3ac0-4e98-b6bb-3a47658c3f2b.svg",
-        },
+        # {
+        #     "title":"Coding Activity over the last 30 days.",
+        #     "type": "svg",
+        #     "src":"https://wakatime.com/share/@EddieDover/e32ac05f-3ac0-4e98-b6bb-3a47658c3f2b.svg",
+        # },
         {
             "title":"Languages over Last 30 Days.",
             "type": "svg",
