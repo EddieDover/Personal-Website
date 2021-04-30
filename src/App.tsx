@@ -18,11 +18,13 @@ import HackerRank from './components/HackerRank';
 import ThisSite from './components/ThisSite';
 import AboutMe from './components/AboutMe';
 import MyWork from './components/MyWork';
-import ReactGA from 'react-ga';
 import Sitemap from './components/Sitemap';
+import MySkills from './components/MySkills';
+import ContactMe from './components/ContactMe';
+import ReactGA from 'react-ga';
 
 import "./App.css"
-import MySkills from './components/MySkills';
+
 interface Props {
   children: React.ReactElement;
 }
@@ -150,11 +152,11 @@ class ButtonData {
 
 function App() {
   const classes = useStyles();
-  const MenuItems = ["About Me", "My Work", "Fun"];
 
   const MenuItemButtons:ButtonData[] = [
     new ButtonData("Articles", false),
     new ButtonData("About Me"),
+    new ButtonData("Contact Me", false),
     new ButtonData("My Work"),
     new ButtonData("My Skills"),
     new ButtonData("Fun"),
@@ -171,7 +173,6 @@ function App() {
               </Typography>
             </Toolbar>
             <Toolbar className={classes.tabBar}>
-              <Button component={Link} variant="contained" color="primary" singlearticle="false" disableElevation to={{ pathname:"/articles" }}>Articles</Button>
               {
                 MenuItemButtons.map( (buttonitem: ButtonData) => (
                   <Button
@@ -195,6 +196,9 @@ function App() {
               </Route>
               <Route path="/articles">
                 <Articles/>
+              </Route>
+              <Route path="/contact_me">
+                <ContactMe/>
               </Route>
               <Route exact path="/">
                 <Grid container spacing={3}>

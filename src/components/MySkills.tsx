@@ -53,19 +53,42 @@ export default class MySkills extends React.Component<MySkillsProps, MySkillsSta
         super(props);
         let my_skills = [
             ["C#", 5],
+            ["C/C++",4],
             [".NET", 5],
+            ["Java",4],
             ["Git", 5],
             ["Github", 5],
             ["Python", 4],
-            ["Angular", 4],
+            ["Angular 7-11", 4],
             ["PHP", 4],
-            ["React", 3],
+            ["React", 4],
+            ["REST", 4],
+            ["HTML/CSS", 5],
+            ["SASS", 4],
+            ["TypeScript", 5],
+            ["JavaScript", 5],
+            ["jQuery",5],
+            ["Go(lang)", 3],
+            ["Rust", 3],
+            ["ColdFusion",4],
+            ["Wordpress API", 5],
         ];
 
+        let state_skills = my_skills.map( (data) => { return new SkillData(data[0].toString(), data[1]) });
+
+        let skillsort = function(skill1:SkillData, skill2:SkillData)
+        {
+            if (skill1.skillName < skill2.skillName) { return -1; }
+            if (skill1.skillName > skill2.skillName) { return 1;}
+            return 0;
+        }
+
         this.state = {
-            skills: my_skills.map( (data) => { return new SkillData(data[0].toString(), data[1]) }),
+            skills: state_skills.sort(skillsort),
         };
     }
+
+
 
     render() {
         return (

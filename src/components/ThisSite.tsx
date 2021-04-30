@@ -33,7 +33,7 @@ export default class ThisSite extends React.Component {
                                     <TableCell><Link target="_blank" rel="noopener" href="https://reactjs.org/">React</Link></TableCell>
                                 </TableRow>
                                 <TableRow>
-                                    <TableCell>&nbsp;</TableCell>
+                                    <TableCell><Link target="_blank" rel="noopener" href="https://developer.wordpress.org/rest-api/">Wordpress API</Link></TableCell>
                                     <TableCell><Link target="_blank" rel="noopener" href="https://material-ui.com/">Material-UI</Link></TableCell>
                                 </TableRow>
                             </TableHead>

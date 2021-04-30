@@ -1,0 +1,22 @@
+.contactItems {
+    display:flex;
+    flex-direction:column;
+    flex-wrap:wrap;
+    padding-left:30px;
+    padding-top:20px;
+    padding-bottom:20px;
+}
+
+.pgpkey {
+    padding-left:30px;
+    padding-bottom:20px;
+}
+
+.contactMeContainer a,.contactMeContainer a:visited {
+    color:black;
+    text-decoration:underline;
+}
+
+.contactItem {
+    margin:3px;
+}
