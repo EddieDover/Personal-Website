@@ -116,7 +116,7 @@ export default class AboutMe extends React.Component<AboutMeProps,AboutMeState> 
                     </Link>
                     </Grid>
                     <Grid item>
-                    <Link href="https://twitter.com/EddieDover" target="_blank" rel="noopener" aria-label="Twitter page">
+                    <Link href="https://qoto.org/@EddieDover" target="_blank" rel="noopener" aria-label="Mastadon page">
                         <Twitter fontSize="large" />
                     </Link>
                     </Grid>

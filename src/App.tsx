@@ -18,8 +18,11 @@ import HackerRank from './components/HackerRank';
 import ThisSite from './components/ThisSite';
 import AboutMe from './components/AboutMe';
 import MyWork from './components/MyWork';
+import ReactGA from 'react-ga';
+import Sitemap from './components/Sitemap';
 
 import "./App.css"
+import MySkills from './components/MySkills';
 interface Props {
   children: React.ReactElement;
 }
@@ -127,9 +130,35 @@ function ScrollTop(props: Props) {
 }
 
 
+ReactGA.pageview('/homepage');
+
+class ButtonData {
+  buttonText:string;
+  buttonLink:any;
+  constructor(text:string, mainPage:boolean = true)
+  {
+    this.buttonText = text;
+    const linktext = text.toLowerCase().replace(/ /g,"_");
+    if (mainPage)
+    {
+      this.buttonLink = "/#" + linktext;
+    } else {
+      this.buttonLink = {pathname: "/" + linktext};
+    }
+  }
+}
+
 function App() {
   const classes = useStyles();
   const MenuItems = ["About Me", "My Work", "Fun"];
+
+  const MenuItemButtons:ButtonData[] = [
+    new ButtonData("Articles", false),
+    new ButtonData("About Me"),
+    new ButtonData("My Work"),
+    new ButtonData("My Skills"),
+    new ButtonData("Fun"),
+  ];
 
   return (
     <Router>
@@ -144,9 +173,18 @@ function App() {
             <Toolbar className={classes.tabBar}>
               <Button component={Link} variant="contained" color="primary" singlearticle="false" disableElevation to={{ pathname:"/articles" }}>Articles</Button>
               {
-                MenuItems.map( (text, index) => (
-                <Button component={Link} to={"/#"+text.toLowerCase().replace(/ /g,"_")} variant="contained" color="primary" disableElevation key={index}>{text}</Button>
-                ))
+                MenuItemButtons.map( (buttonitem: ButtonData) => (
+                  <Button
+                      component={Link}
+                      variant="contained"
+                      color="primary"
+                      singlearticle="false"
+                      disableElevation
+                      to={ buttonitem.buttonLink}
+                    >
+                  {buttonitem.buttonText}
+                  </Button>
+                  ))
               }
             </Toolbar>
           </AppBar>
@@ -163,6 +201,7 @@ function App() {
                   <AboutMe />
                   <MyWork />
                   <ThisSite />
+                  <MySkills />
                   <HackerRank  />
                   <Wakatime />
                   <Fun />
@@ -173,7 +212,8 @@ function App() {
           <footer className='footer'>
             <AppBar position="static">
               <Toolbar>
-                <a href={process.env.PUBLIC_URL + 'sitemap.xml'}>Sitemap</a>
+                <a href={process.env.PUBLIC_URL + 'sitemap.xml'}>Sitemap</a>&nbsp;&nbsp;
+                <a rel="me" href="https://qoto.org/@EddieDover">Mastodon</a>
               </Toolbar>
             </AppBar>
           </footer>

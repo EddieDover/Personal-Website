@@ -131,3 +131,5 @@ api/psvenv/
 node_modules
 
 api/.flaskenv
+
+yarn.lock
